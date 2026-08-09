@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pars-law-ai-enterprise"
+version = "0.1.0"
+description = "ParsLaw AI Enterprise - Legal knowledge and contract analysis platform"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "PySide6>=6.8,<7",
+    "SQLAlchemy>=2.0,<3",
+    "pydantic-settings>=2.6,<3",
+    "python-dotenv>=1.0,<2",
+]
+
+[project.optional-dependencies]
+pdf = [
+    "pymupdf>=1.24,<2",
+    "pypdf>=5,<6",
+]
+ocr = [
+    "pytesseract>=0.3.13,<1",
+    "Pillow>=11,<12",
+]
+dev = [
+    "pytest>=8,<9",
+    "pytest-qt>=4,<5",
+    "ruff>=0.9,<1",
+]
+
+[project.scripts]
+pars-law = "pars_law.app:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pars_law"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
